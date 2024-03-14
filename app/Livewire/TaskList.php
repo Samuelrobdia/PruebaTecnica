@@ -37,9 +37,9 @@ class TaskList extends Component
                 return 'Tareas de hoy';
             } elseif ($diff == 1) {
                 return 'Tareas de mañana';
-            } elseif ($diff < 7) {
+            } elseif ($diff <= 7) {
                 return 'Tareas de la próxima semana';
-            } elseif ($diff < 30) {
+            } elseif ($diff <= 30) {
                 return 'Tareas en un futuro próximo';
             } else {
                 return 'Tareas en el futuro';

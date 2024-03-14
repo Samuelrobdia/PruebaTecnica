@@ -34,7 +34,16 @@
                 <input type="radio" wire:model="frequency" name="frequency" id="yearly" value="yearly" class="mr-2" required>
                 <label for="monthly" class="mr-4">yearly</label>
 
-                {{-- daily,weekly,multiple_days,monthly,yearly --}}
+            </div>
+            
+            <div class="mb-4 relative">
+                <label class="block text-gray-700 mb-2">Group</label>
+                <select name="group_id" wire:model="group_id" class="w-full appearance-none px-4 py-2 rounded-md bg-gray-350 text-black" required>
+                    <option value="">Selecciona un grupo</option>
+                    @foreach($groups as $id => $name)
+                        <option value="{{ $id }}">{{ $name }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
 

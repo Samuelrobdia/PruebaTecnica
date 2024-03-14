@@ -15,6 +15,11 @@
                     <div class="">
                         <span class="font-bold">Frequency </span> {{ $task->frequency }}
                     </div>
+                    <div class="">
+                        <span class="font-bold">Id Group </span> {{ $task->group_id }}
+                    </div>
+                    
+
                 </div>
                 <div class="px-6 py-4">
                     <button wire:click="completeTask({{ $task->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition hover:scale-105">
