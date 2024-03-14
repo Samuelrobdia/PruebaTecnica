@@ -11,6 +11,7 @@ class Task extends Model
 
     protected $fillable = [
         'task',
+        'frequency',
         'start_date',
         'end_date',
     ];

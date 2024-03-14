@@ -10,8 +10,11 @@
                 <div class="px-6 py-4">
                     <div class="font-bold text-xl mb-2">{{ $task->task }}</div>
                     <p class="text-gray-700 text-base">
-                        Desde: {{ $task->start_date }} - Hasta: {{ $task->end_date }}
+                        <span class="font-bold">Desde </span> {{ $task->start_date }} -  <span class="font-bold">Hasta </span> {{ $task->end_date }}
                     </p>
+                    <div class="">
+                        <span class="font-bold">Frequency </span> {{ $task->frequency }}
+                    </div>
                 </div>
                 <div class="px-6 py-4">
                     <button wire:click="completeTask({{ $task->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition hover:scale-105">
