@@ -20,14 +20,10 @@ class TaskGroup extends Component
 
     }
 
-    public function mount()
-    {
-        $this->groups = Group::all();
-
-    }
-
     public function render()
     {
+        $this->groups = Group::all();
+        
         return view('livewire.task-group',['groups' => $this->groups]);
     }
 }
