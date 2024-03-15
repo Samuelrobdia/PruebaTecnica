@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Group;
 use App\Models\Task;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class TaskCreate extends Component
@@ -16,6 +17,11 @@ class TaskCreate extends Component
     public $end_date;
     public $groups;
     
+    #[On('GroupCreated')]
+    public function refreshForm(){
+        $this->render();
+    }
+
     public function saveTask(){
         
         $this->validate([

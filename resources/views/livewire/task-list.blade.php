@@ -5,6 +5,7 @@
             <hr class="border-b border-gray-400">
         </div>
         <ul class="">
+            
             @foreach ($tasks as $task)
             <li class="flex items-center justify-center  bg-gray-300 shadow-lg rounded-lg overflow-hidden m-4">
                 <div class="px-6 py-4">
@@ -13,20 +14,20 @@
                         <span class="font-bold">Desde </span> {{ $task->start_date }} -  <span class="font-bold">Hasta </span> {{ $task->end_date }}
                     </p>
                     <div class="">
-                        <span class="font-bold">Frequency </span> {{ $task->frequency }}
+                        <span class="font-bold">Frequency: </span> {{ $task->frequency }}
                     </div>
                     <div class="">
-                        <span class="font-bold">Id Group </span> {{ $task->group_id }}
+                        <span class="font-bold">Id Group: </span> {{ $task->group_id }}
                     </div>
-                    
 
                 </div>
                 <div class="px-6 py-4">
                     <button wire:click="completeTask({{ $task->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition hover:scale-105">
-                        Completar tarea
+                        Complete Task
                     </button>
                 </div>
             </li>
+            
             @endforeach
         </ul>
     @empty
@@ -34,4 +35,5 @@
             <p class="text-center text-gray-500">No hay tareas.</p>
         </div>
     @endforelse
+    
 </div>

@@ -23,7 +23,7 @@ class CreateGroup extends Component
             'description' => $this->description
         ]);
 
-        $this->dispatch('GroupCreated');
+        
         $this->reset();
     }
 
