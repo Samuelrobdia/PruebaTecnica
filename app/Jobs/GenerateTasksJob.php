@@ -28,73 +28,64 @@ class GenerateTasksJob implements ShouldQueue
      */
     public function handle(): void
     {
-        // Obtener todas las tareas
         $tasks = Task::all();
 
         foreach ($tasks as $task) {
-            // Lógica para generar las tareas periódicas
+            
             $this->generateRecurringTasks($task);
         }
     }
 
     private function generateRecurringTasks(Task $task): void {
-        // Fecha de inicio y fin del rango
+       
+        $currentDate = Carbon::now();
         $start = Carbon::parse($task->start_date);
         $end = Carbon::parse($task->end_date);
 
-        // Duración de la tarea
+        if (!$currentDate->between($start,$end)){
+           return;
+        } 
+
         $duration = $start->diffInDays($end);
 
-        // Determinar la frecuencia y calcular las fechas de las tareas
         switch ($task->frequency) {
+            
             case 'daily':
-                $interval = CarbonInterval::day();
+                $task->completed = false;
+
                 break;
-            case 'weekly':
-                $interval = CarbonInterval::week()->setWeekStartsAt(Carbon::MONDAY);
+            
+                case 'weekly':
+            
+                if($currentDate->isMonday()){
+                    $task->completed = false;
+                }
                 break;
-            case 'multiple_days':
-                $interval = CarbonInterval::week()->setWeekStartsAt(Carbon::MONDAY)->weeks(1)->days(1, 3, 5);
+            
+                case 'multiple_days':
+                
+                if($currentDate->isMonday() or $currentDate->isWednesday() or $currentDate->isFriday() ){
+                    $task->completed = false;
+                }
                 break;
-            case 'monthly':
-                $interval = CarbonInterval::month()->day(5);
+            
+                case 'monthly':
+                
+                if ($currentDate->day == 5){
+                    $task->completed = false;
+                }
                 break;
             case 'yearly':
-                $interval = Carbon::parse('March 5')->yearly();
+
+                if ($currentDate->month == 3 && $currentDate->day == 5){
+                    $task->completed = false;
+                }
                 break;
-            default:
-                // Frecuencia no válida
-                return;
         }
 
-        // Fecha inicial para la generación
-        $currentDate = $start->copy();
+        $task->save();
+ 
 
-        // Generar tareas hasta la fecha final
-        while ($currentDate->lte($end)) {
-            $this->createTask($task, $currentDate, $duration);
-            $currentDate->add($interval);
-        }
     }
 
-    private function createTask(Task $task, Carbon $date, int $duration): void {
-        
-        // Actualizar la tarea existente o crear una nueva si es necesario
-        $existingTask = Task::where('task', $task->task)
-            ->where('start_date', $date)
-            ->where('end_date', $date->copy()->addDays($duration))
-            ->first();
-
-        if ($existingTask) {
-            $existingTask->update(['completed' => false]);
-        } else {
-            Task::create([
-                'task' => $task->task,
-                'frequency' => $task->frequency,
-                'start_date' => $date,
-                'end_date' => $date->copy()->addDays($duration),
-                'completed' => false,
-            ]);
-        }
-    }
 }
