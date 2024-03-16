@@ -6,16 +6,23 @@
         <div class="mb-4 ">
             <label for="task" class="block text-black mb-2">Task</label>
             <input type="text" wire:model="task" class="border-solid border-2 border-black w-full px-4 py-2 rounded-md bg-gray-350 text-black" placeholder="Enter Task">
+            @error('task') <div class="mt-2"> <span class="mt-1 rounded-md bg-red-200 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-700/10">{{ $message }}</span> </div>@enderror
+
         </div>
 
         <div class="mb-4">
             <label for="start_date" class="block text-black mb-2">Start Date</label>
             <input type="date" wire:model="start_date" class="border-solid border-2 border-black w-full px-4 py-2 rounded-md bg-gray-350 text-black" placeholder="Enter date start">    
+            @error('start_date') <div class="mt-2"> <span class="mt-1 rounded-md bg-red-200 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-700/10">{{ $message }}</span> </div>@enderror
+            
+
         </div>
 
         <div class="mb-6">
             <label for="end_date" class="block text-black mb-2">End Date</label>
             <input type="date" wire:model="end_date" class="border-solid border-2 border-black w-full px-4 py-2 rounded-md bg-gray-350 text-black" placeholder="Enter date end"> 
+            @error('end_date') <div class="mt-2"> <span class="mt-1 rounded-md bg-red-200 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-700/10">{{ $message }}</span> </div>@enderror
+
         </div>
 
         <div class="mb-4">
@@ -33,9 +40,8 @@
                 <input type="radio" wire:model="frequency" name="frequency" id="monthly" value="monthly" class="mr-2" required>
                 <label for="monthly" class="mr-4">monthly</label>
                 
-                <input type="radio" wire:model="frequency" name="frequency" id="yearly" value="yearly" class="mr-2" required>
+                <input type="radio" wire:model="frequency" name="frequency" id="yearly" value="yearly" class="mr-2" >
                 <label for="monthly" class="mr-4">yearly</label>
-
             </div>
         </div>
             <div class="mb-4 relative ">

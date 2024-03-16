@@ -18,17 +18,23 @@ class LoginForm extends Component
     
     public function login(){
         
-        //Valida los usuarios
-        $validate = $this->validate();
+        // Valida los usuarios
+        $this->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ], [
+            'email.required' => 'Please provide an email',
+            'email.email' => 'Please provide a valid email',
+            'password.required' => 'Please provide a password',
+            'password.min' => 'The password must be at least 6 characters',
+        ]);
 
-
-        // Comprobar las credenciales validas
-        if (Auth::attempt($validate)) {
-
+        // Comprueba las credenciales válidas
+        if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             return redirect()->intended('/home');
+        } else {
+            session()->flash('errors', 'These credentials do not match our records.');
         }
-
-        return redirect()->intended('/login');
        
     }
     

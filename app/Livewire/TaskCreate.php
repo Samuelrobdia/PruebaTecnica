@@ -27,9 +27,15 @@ class TaskCreate extends Component
         $this->validate([
             'task' => 'required|string|max:255',
             'frequency' => 'required|in:daily,weekly,multiple_days,monthly,yearly',
-            // 'group_id' => 'required',
+            'group_id' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
+        ], [
+            'task.required' => 'Please provide an task',
+            'frequency.required' => 'Please provide a frequency',
+            'group_id.required' => 'Please provide a Group',
+            'start_date.required' => 'Please provide a start date',
+            'end_date.required' => 'Please provide a end date',
         ]);
         
         

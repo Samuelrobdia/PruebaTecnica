@@ -19,6 +19,12 @@ class RegisterForm extends Component
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
+        ], [
+            'name.required' => 'Please provide an name',
+            'email.required' => 'Please provide an email',
+            'email.email' => 'Please provide a valid email',
+            'password.required' => 'Please provide a password',
+            'password.min' => 'The password must be at least 6 characters',
         ]);
         
         $user = User::create([
@@ -28,7 +34,7 @@ class RegisterForm extends Component
         ]);
         
         if($user){
-            return redirect('/login')->with('success', 'Cuenta creada con exito.');
+            return redirect('/login')->with('success', 'Account created successfully.');
         }
 
         return redirect('/register')->with('error', 'Se ha producido un error.');

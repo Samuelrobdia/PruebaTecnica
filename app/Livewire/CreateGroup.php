@@ -16,6 +16,9 @@ class CreateGroup extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
+        ], [
+            'name.required' => 'Please provide an name',
+            'description.required' => 'Please provide a description',
         ]);
  
         Group::create([
@@ -23,7 +26,7 @@ class CreateGroup extends Component
             'description' => $this->description
         ]);
 
-        
+        $this->dispatch('GroupCreated');
         $this->reset();
     }
 
