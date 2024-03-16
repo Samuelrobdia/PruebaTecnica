@@ -15,7 +15,6 @@
             @error('description') <div class="mt-2"> <span class="mt-1 rounded-md bg-red-200 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-700/10">{{ $message }}</span> </div>@enderror
 
         </div>
-
         <div class="flex justify-end">
             <button type="submit" class="w-1/3 mt-0 p-2 rounded-md bg-regulargreen text-white font-bold text-center transition hover:scale-105">Create Group</button>
         </div>

@@ -1,6 +1,5 @@
 <div class="min-h-screen flex items-center justify-center">
     
-  
   <div class="max-w-md w-full bg-gray-300 p-8 rounded-lg">
     <h2 class="text-3xl font-bold text-black mb-4">Welcome !</h2>
     <h3 class="text-regularred font-semibold text-xl mb-8">Sign In</h3>

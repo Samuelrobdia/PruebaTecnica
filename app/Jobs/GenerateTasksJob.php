@@ -34,6 +34,7 @@ class GenerateTasksJob implements ShouldQueue
             
             $this->generateRecurringTasks($task);
         }
+       
     }
 
     private function generateRecurringTasks(Task $task): void {
@@ -84,7 +85,6 @@ class GenerateTasksJob implements ShouldQueue
         }
 
         $task->save();
- 
 
     }
 

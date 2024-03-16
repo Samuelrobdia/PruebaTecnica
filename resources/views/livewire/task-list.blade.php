@@ -32,7 +32,7 @@
         </ul>
     @empty
         <div class="flex items-center justify-center">
-            <p class="text-center text-gray-500">No hay tareas.</p>
+            <p class="text-center text-2xl text-gray-500">There are no tasks.</p>
         </div>
     @endforelse
     

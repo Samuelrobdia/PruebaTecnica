@@ -34,15 +34,15 @@ class TaskList extends Component
             $diff = $dueDate->diff($today)->format('%a');
             
             if ($diff == 0) {
-                return 'Tareas de hoy';
+                return 'Task Today';
             } elseif ($diff == 1) {
-                return 'Tareas de mañana';
+                return 'Task Tomorrow';
             } elseif ($diff <= 7) {
-                return 'Tareas de la próxima semana';
+                return 'Task Next Week';
             } elseif ($diff <= 30) {
-                return 'Tareas en un futuro próximo';
+                return 'Task Next';
             } else {
-                return 'Tareas en el futuro';
+                return 'Task Next';
             }
         });
 

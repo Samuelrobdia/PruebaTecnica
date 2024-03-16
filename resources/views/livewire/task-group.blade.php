@@ -1,10 +1,10 @@
 
 <div class="p-10 border border-gray-300 bg-gray-200 ">
 <div>
-   <div class="flex items-center justify-center  gap-x-2">
+   <div class="flex items-center justify-center gap-x-2">
       <h2 class="text-3xl font-normal text-center">Task Group</h2>
-      <button wire:click="$toggle('showCreateGroupForm')" class="inline-block">
-         <img src="{{ asset('svg/buttonTaskGroup.svg') }}" alt="Create Group" class="h-auto w-8">
+      <button class="transition hover:scale-110" wire:click="$toggle('showCreateGroupForm')" class="">
+         <img src="{{ asset('svg/buttonTaskGroup.svg') }}" alt="Create Group" class="mt-2">
      </button>
    </div>
    <div class=" mt-3 mx-10">

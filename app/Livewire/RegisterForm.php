@@ -34,7 +34,7 @@ class RegisterForm extends Component
         ]);
         
         if($user){
-            return redirect('/login')->with('success', 'Account created successfully.');
+            return redirect('/')->with('success', 'Account created successfully.');
         }
 
         return redirect('/register')->with('error', 'Se ha producido un error.');

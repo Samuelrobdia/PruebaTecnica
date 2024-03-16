@@ -19,9 +19,12 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/home', Home::class)->middleware('auth:web');
 Route::get('/home', function () {
     return view('index');
-})->middleware('auth:web');
+})->middleware('auth:web')->name('home');
 
-
-Route::get('/login', LoginForm::class);
+Route::get('/', LoginForm::class)->name('login');
 
 Route::get('/register', RegisterForm::class);
+
+Route::get('/errors/404', function() {
+    return view('errors.404');
+})->name('errors.404');
