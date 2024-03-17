@@ -15,6 +15,8 @@ class RegisterForm extends Component
 
     public function register()
     {
+
+        // Validar los datos introducidos
         $this->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -27,17 +29,20 @@ class RegisterForm extends Component
             'password.min' => 'The password must be at least 6 characters',
         ]);
         
+        // Creacion del usuario
         $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ]);
         
+        // Comprobacion del usuario 
         if($user){
             return redirect('/')->with('success', 'Account created successfully.');
         }
 
-        return redirect('/register')->with('error', 'Se ha producido un error.');
+        // Se ha producido un error de vuelta al registro
+        return redirect('/register')->with('error', 'An error has occurred.');
     }
 
     public function render()

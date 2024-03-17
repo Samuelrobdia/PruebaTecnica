@@ -17,6 +17,7 @@ class TaskCreate extends Component
     public $end_date;
     public $groups;
     
+    // Refrescar la vista cuando se crea un grupo nuevo
     #[On('GroupCreated')]
     public function refreshForm(){
         $this->render();
@@ -24,6 +25,7 @@ class TaskCreate extends Component
 
     public function saveTask(){
         
+        // Validar el formulario y los mandar los mensajes de error
         $this->validate([
             'task' => 'required|string|max:255',
             'frequency' => 'required|in:daily,weekly,multiple_days,monthly,yearly',
@@ -39,6 +41,7 @@ class TaskCreate extends Component
         ]);
         
         
+        // Creacion de la tarea
         $task = Task::create([
             'task' => $this->task,
             'frequency' => $this->frequency,
@@ -47,7 +50,9 @@ class TaskCreate extends Component
             'end_date' => $this->end_date,
         ]);
         
+        // Lanzar un #On para la vista
         $this->dispatch('taskCreated');
+        // Resetear el formulario
         $this->reset();
         
     }

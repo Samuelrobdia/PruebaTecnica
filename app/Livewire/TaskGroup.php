@@ -17,6 +17,7 @@ class TaskGroup extends Component
     public $tasks;
     
 
+    // Se lanzara esta funcion cuando se active alguno de estos eventos
     #[On('DeleteGroup')]
     #[On('DeleteTask')]
     #[On('GroupCreated')]
@@ -27,6 +28,7 @@ class TaskGroup extends Component
 
     }
 
+    // Enseñar las tareas por cada grupo
     public function showTasks($group_id){
         $this->selectedGroupId = $group_id;
         
@@ -34,6 +36,7 @@ class TaskGroup extends Component
        
     }
 
+    // Eliminar un grupo
     public function deleteGroup($group_id){
 
         $group = Group::findOrFail($group_id);
@@ -43,6 +46,7 @@ class TaskGroup extends Component
         
     }
 
+    // Eliminar una tarea
     public function deleteTask($taskId){
         
         $task = Task::findOrFail($taskId);
@@ -50,10 +54,12 @@ class TaskGroup extends Component
         $this->dispatch('DeleteTask');
     }
 
+    // Cerrar el modal donde salen las tareas de cada grupo
     public function closeModal(){
         $this->selectedGroupId = null;
     }
 
+    // Renderizar el componente
     public function render()
     {
         $this->groups = Group::all();

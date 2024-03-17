@@ -9,6 +9,7 @@ class ViewTasksForGroup extends Component
 {
     public $group;
 
+    // Renderizar el componente
     public function render()
     {
         $tasks = Task::where('group_id', $this->group->id)->get();

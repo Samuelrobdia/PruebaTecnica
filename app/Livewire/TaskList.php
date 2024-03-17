@@ -9,6 +9,7 @@ use Livewire\Attributes\On;
 class TaskList extends Component
 {
     
+    // Se lanzara esta funcion cuando se active alguno de estos eventos
     #[On('DeleteTask')]
     #[On('taskCreated')]
     public function refreshTaskList()
@@ -16,6 +17,7 @@ class TaskList extends Component
         $this->render();
     }
 
+    // Completar una tarea
     public function completeTask($taskId)
     {
         $task = Task::findOrFail($taskId);
@@ -23,17 +25,22 @@ class TaskList extends Component
         $task->save();
     }
 
+    // Renderizado del componente
     public function render()
     {
 
+        // Esta variable contiene las tareas sin completar en orden de ultima fecha
         $tasks = Task::where('completed', false)->orderBy('end_date')->get();
 
         $groupedTasks = $tasks->groupBy(function ($task) {
             
             $dueDate = new \DateTime($task->end_date);
             $today = new \DateTime();
+
+            // Calcula la diferencia de dias entre la fecha de vencimiento y la fecha actual.
             $diff = $dueDate->diff($today)->format('%a');
             
+            // Se decide en que categoria agrupar la tarea basandose en la diferencia de dias.
             if ($diff == 0) {
                 return 'Task Today';
             } elseif ($diff == 1) {

@@ -1,5 +1,5 @@
 
-<div class="p-10 border border-gray-300 bg-gray-200 ">
+<div class="p-10 border h-full border-gray-300 bg-gray-200 ">
 <div>
    <div class="flex items-center justify-center gap-x-2">
       <h2 class="text-3xl font-normal text-center">Task Group</h2>

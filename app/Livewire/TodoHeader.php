@@ -7,11 +7,13 @@ use Livewire\Component;
 
 class TodoHeader extends Component
 {
+    // Renderizado del componente
     public function render()
     {
         return view('livewire.todo-header');
     }
 
+    // Desloguear al usuario
     public function logout(){
     
         Auth::logout();
