@@ -8,7 +8,8 @@ use Livewire\Attributes\On;
 
 class TaskList extends Component
 {
-
+    
+    #[On('DeleteTask')]
     #[On('taskCreated')]
     public function refreshTaskList()
     {

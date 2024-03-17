@@ -16,6 +16,9 @@ class TaskGroup extends Component
     public $selectedGroupId;
     public $tasks;
     
+
+    #[On('DeleteGroup')]
+    #[On('DeleteTask')]
     #[On('GroupCreated')]
     public function refreshGroupList()
     {
@@ -29,6 +32,22 @@ class TaskGroup extends Component
         
         $this->tasks = Task::where('group_id', $group_id)->get();
        
+    }
+
+    public function deleteGroup($group_id){
+
+        $group = Group::findOrFail($group_id);
+        $group->delete();
+        $this->dispatch('DeleteGroup');
+        $this->closeModal();
+        
+    }
+
+    public function deleteTask($taskId){
+        
+        $task = Task::findOrFail($taskId);
+        $task->delete();
+        $this->dispatch('DeleteTask');
     }
 
     public function closeModal(){

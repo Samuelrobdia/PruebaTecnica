@@ -47,7 +47,7 @@
             <div class="mb-4 relative ">
                 <label class="block text-gray-700 mb-2">Group</label>
                 <select name="group_id" wire:model="group_id" class="border-solid border-2 border-black w-full appearance-none px-4 py-2 rounded-md bg-gray-350 text-black" required>
-                    <option wire: value="">Selecciona un grupo</option>
+                    <option wire: value="">Select Group</option>
                     @foreach($groups as $id => $name)
                         <option value="{{ $id }}">{{ $name }}</option>
                     @endforeach

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Livewire;
 
 use App\Livewire\LoginForm;
 use App\Models\User;
@@ -11,55 +11,78 @@ use Tests\TestCase;
 
 class LoginFormTest extends TestCase
 {
-   
     use RefreshDatabase;
 
     /** @test */
-    public function user_can_login_with_valid_credentials() {
-        // Creamos un usuario
-        $user = User::create([
-            'name' =>'test1234',
+    public function login_with_valid_credentials_redirects_to_home()
+    {
+        $user = User::factory()->create([
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
         ]);
 
-        Auth::shouldReceive('guard')->andReturnSelf();
-
-        // Simulamos la autenticación
-        Auth::shouldReceive('attempt')
-            ->once()
-            ->with(['email' => 'test@example.com', 'password' => 'password'])
-            ->andReturn(true);
-
-        // Ejecutamos el componente Livewire
         Livewire::test(LoginForm::class)
             ->set('email', 'test@example.com')
-            ->set('password', 'password')
+            ->set('password', bcrypt('password'))
             ->call('login')
             ->assertRedirect('/home');
 
-        Auth::shouldReceive('user')->andReturn($user);
-
-        // Verificamos que el usuario esté autenticado
-        $this->assertAuthenticatedAs($user);
+        $this->assertTrue(Auth::check());
     }
 
-    /**
-     * A basic feature test example.
-     */
-    public function test_example(): void
+    /** @test */
+    public function login_with_invalid_credentials_fails()
     {
-       // Simulamos la autenticación fallida
-       Auth::shouldReceive('attempt')
-       ->once()
-       ->andReturn(true);
-
-        // Ejecutamos el componente Livewire
         Livewire::test(LoginForm::class)
-       ->set('email', 'test@example.com')
-       ->set('password', 'wrong_password')
-       ->call('login')
-       ->assertRedirect('/home')
-       ->assertSessionHasErrors(['email']);
+            ->set('email', 'invalidexample.com')
+            ->set('password', 'invalidpassword')
+            ->call('login');
+            
+            // Recuperar los errores de la sesión
+            $errors = session('errors')->get('errors');
+
+            // Verificar si los errores contienen el mensaje esperado
+            $this->assertContains('These credentials do not match our records.', $errors);
+
+
+        $this->assertFalse(Auth::check());
+    }
+
+    /** @test */
+    public function login_requires_email()
+    {
+        Livewire::test(LoginForm::class)
+            ->set('password', 'password')
+            ->call('login')
+            ->assertHasErrors(['email' => 'required']);
+    }
+
+    /** @test */
+    public function login_requires_valid_email()
+    {
+        Livewire::test(LoginForm::class)
+            ->set('email', 'invalidemail')
+            ->set('password', 'password')
+            ->call('login')
+            ->assertHasErrors(['email' => 'email']);
+    }
+
+    /** @test */
+    public function login_requires_password()
+    {
+        Livewire::test(LoginForm::class)
+            ->set('email', 'test@example.com')
+            ->call('login')
+            ->assertHasErrors(['password' => 'required']);
+    }
+
+    /** @test */
+    public function login_requires_minimum_password_length()
+    {
+        Livewire::test(LoginForm::class)
+            ->set('email', 'test@example.com')
+            ->set('password', 'short')
+            ->call('login')
+            ->assertHasErrors(['password' => 'min']);
     }
 }
