@@ -99,3 +99,7 @@ El diseño de la web es minimalista, cuando el usuario inicia sesión, ve de un 
 9. Visitar la URL 
     ```bash
     http://localhost:8000
+
+
+## Pagina web en produccion
+pruebatecnica-production-36aa.up.railway.app
