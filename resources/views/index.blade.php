@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO</title>
-    {{-- <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     @livewireStyles
     @vite('resources/css/app.css')
 </head>
