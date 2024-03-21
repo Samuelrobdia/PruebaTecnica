@@ -13,7 +13,7 @@
 
 # Laravel Tailwind CSS & Livewire Project
 
-Este es un proyecto para una prueba técnica, la cual consiste en crear una página de tareas periódicas. Dichas tareas se van a poder agrupar en grupos. Al deberse de tareas periódicas, cuando se crean se asignan un rango de fechas y una frecuencia, por lo que mientras se esté en el rango establecido y dependiendo de la frecuencia, la tarea se volverá a poner como **no completada**.
+Este es un proyecto el cual consiste en crear una página de tareas periódicas. Dichas tareas se van a poder agrupar en grupos. Al deberse de tareas periódicas, cuando se crean se asignan un rango de fechas y una frecuencia, por lo que mientras se esté en el rango establecido y dependiendo de la frecuencia, la tarea se volverá a poner como **no completada** gracias a los **jobs** de laravel.
 
 ## Descripción
 
@@ -57,7 +57,7 @@ El diseño de la web es minimalista, cuando el usuario inicia sesión, ve de un 
 1. Clonar este repositorio en tu máquina local
 
    ```bash
-   git clone https://github.com/Samuelrobdia/PruebaTecnica.git
+   git clone https://github.com/Samuelrobdia/TodoList.git
 
 2. Instalar las dependencias PHP
     ```bash
@@ -77,12 +77,12 @@ El diseño de la web es minimalista, cuando el usuario inicia sesión, ve de un 
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
     DB_PORT=3306
-    DB_DATABASE=pruebaTecnica
+    DB_DATABASE=todolist
     DB_USERNAME={{user}}
     DB_PASSWORD={{password}}
     ```
     ```bash
-    CREATE DATABASE pruebaTecnica;
+    CREATE DATABASE todolist;
 
 6. Ejecutar las migraciones
    ```bash
@@ -99,7 +99,3 @@ El diseño de la web es minimalista, cuando el usuario inicia sesión, ve de un 
 9. Visitar la URL 
     ```bash
     http://localhost:8000
-
-
-## Pagina web en produccion
-pruebatecnica-production-36aa.up.railway.app
